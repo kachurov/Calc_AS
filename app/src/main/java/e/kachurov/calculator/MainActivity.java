@@ -58,6 +58,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvF2 = findViewById(R.id.F2);
         oScreen = new Screen(); // создали экземпляр класса Screen
         vScreenChar.append("0");
+        tvF1.setBackgroundColor(getResources().getColor(R.color.Orange));
     }
 
     private void SaveD(char Action) {
