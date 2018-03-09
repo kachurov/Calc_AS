@@ -54,15 +54,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         // Получим VIEW наших объектов - дисплея и функциональных полей
         tvScreen = findViewById(R.id.textDisplay);
-        tvF1 = findViewById(R.id.F1); //отображение операций - +, -, /, * и т.д.
-        tvF2 = findViewById(R.id.F2);
+        tvF1 = findViewById(R.id.textView11); //отображение операций - +, -, /, * и т.д.
+        //tvF2 = findViewById(R.id.F2);
         oScreen = new Screen(); // создали экземпляр класса Screen
         vScreenChar.append("0");
-        tvF1.setBackgroundColor(getResources().getColor(R.color.Orange));
     }
 
     private void SaveD(char Action) {
+        CharSequence cs = String.valueOf(Action);
         // Запись чисел в регистры
+        tvF1.setBackgroundColor(getResources().getColor(R.color.Orange));
+        //tvF2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        tvF1.setText(cs);
         switch (oScreen.ActionHistory(PrevKey)) {
             case 'C': // Была нажата клавиша Сброс. Меняем константу в dReg[Pointer] на новую, не меняя действия!
                 if (oScreen.ActionHistory(CurrentKey) != 'C') {
@@ -230,11 +233,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         vScreenChar.delete(0, vScreenChar.length()); //сброс строки
                         for (Pointer = 3; Pointer >= 0; Pointer--) {
                             dReg[Pointer] = 0; //сброс регистра
-                            cReg[Pointer] = '0';
+                            cReg[Pointer] = ' ';
                         }
                         Pointer = 0;
                         tvF1.setText(" ");// Сбросим функциональный экран
+                        tvF1.setBackgroundColor(getResources().getColor(R.color.Background));
                         intClearAction = 0;
+                        oScreen.RsetHistory();
                         break;
                 }
         }

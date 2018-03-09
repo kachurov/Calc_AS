@@ -10,6 +10,10 @@ class Screen {
 
     private char PrevKey, CurrentKey, PrevAction, CurrentAction;
 
+    public void RsetHistory () {
+        PrevKey = CurrentKey = PrevAction = CurrentAction = ' ';
+    }
+
     double Calculate(double s1, char Action, double s2) {
         switch (Action) {
             case '+':
@@ -27,7 +31,7 @@ class Screen {
 
     void KeyHistory(int vId) {
         switch (vId) {
-            case R.id.Row10_button1:  // кнопка 0
+            case R.id.Row10_button1: // кнопка 0
                 PrevKey = CurrentKey;
                 CurrentKey = '0';
                 break;
@@ -47,7 +51,7 @@ class Screen {
                 PrevKey = CurrentKey;
                 CurrentKey = '4';
                 break;
-            case R.id.Row6_button2:  // кнопка 5
+            case R.id.Row6_button2: // кнопка 5
                 PrevKey = CurrentKey;
                 CurrentKey = '5';
                 break;
@@ -141,4 +145,5 @@ class Screen {
         if (PrevNextValue) return CurrentKey;
         else return PrevKey;
     }
+
 }

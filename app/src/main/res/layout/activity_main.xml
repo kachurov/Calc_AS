@@ -2,9 +2,31 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:textAlignment="center"
     tools:context="e.kachurov.calculator.MainActivity">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="54dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textDisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@color/colorAccent"
+        tools:textSize="30sp" />
 
     <TextView
         android:id="@+id/textDisplay"
@@ -579,30 +601,5 @@
         </TableRow>
 
     </TableLayout>
-
-    <LinearLayout
-        android:id="@+id/TopLayout"
-        android:layout_width="363dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/F2"
-            android:layout_width="284dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:layout_height="match_parent"
-            tools:layout_width="match_parent" />
-
-        <TextView
-            android:id="@+id/F1"
-            android:layout_width="137dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
