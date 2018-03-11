@@ -180,9 +180,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void Update_Shift(char cH) {
         switch (cH) {
             case '7':  // 1/x
-                ScreenDraw(1 / Double.parseDouble(vScreenChar.toString()));
+                double i = Double.parseDouble(vScreenChar.toString()); // делить на ноль нельзя
+                if (i != 0) {ScreenDraw(1 / i) ;} else {Reset(1);}
         }
-    }
+        }
 
     void Backspace() {
         if (vScreenChar.length() == 1) {
