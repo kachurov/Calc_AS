@@ -14,11 +14,10 @@
         android:layout_width="54dp"
         android:layout_height="34dp"
         android:layout_marginBottom="9dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="260dp"
+        android:layout_marginStart="268dp"
         android:layout_marginTop="10dp"
         android:clickable="false"
-        android:text="@string/Memory"
+        android:text="@string/MR"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorAccent"
@@ -74,7 +73,7 @@
 
     <TableLayout
         android:id="@+id/tableLayout"
-        android:layout_width="308dp"
+        android:layout_width="311dp"
         android:layout_height="366dp"
         android:layout_marginBottom="16dp"
         android:gravity="center_vertical|center_horizontal|center"
@@ -86,9 +85,9 @@
 
         <TableRow
             android:id="@+id/Row1_Надпись"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -96,6 +95,7 @@
                 android:id="@+id/Row1_textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/NoChar"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@android:color/holo_orange_dark"
@@ -115,8 +115,7 @@
                 android:id="@+id/Row1_textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:text="@string/RevX"
+                android:text="@string/Shift"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@android:color/holo_orange_dark"
@@ -147,23 +146,20 @@
             android:id="@+id/Row2_Кнопки"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:gravity="center_horizontal"
-            android:visibility="visible">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/Row2_button1"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:backgroundTint="@android:color/darker_gray"
                 android:onClick="onClick"
                 android:text="@string/Shift"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/OrangeDark"
-                android:visibility="visible" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/Row2_button2"
@@ -208,11 +204,9 @@
 
         <TableRow
             android:id="@+id/Row3_Надпись"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -220,16 +214,11 @@
                 android:id="@+id/Row3_textView1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/Background"
-                android:enabled="true"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical|center_horizontal"
                 android:text="@string/RevX"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/Gray"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/DarkerGray"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 android:typeface="normal"
                 android:visibility="visible" />
 
@@ -279,7 +268,7 @@
             android:id="@+id/Row4_Кнопки"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/Row4_button1"
@@ -333,7 +322,7 @@
             android:id="@+id/Row5_Надпись"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="invisible">
 
@@ -393,7 +382,7 @@
             android:id="@+id/Row6_Кнопки"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/Row6_button1"
@@ -448,7 +437,7 @@
             android:id="@+id/Row7_Надпись"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="invisible">
 
@@ -508,7 +497,7 @@
             android:id="@+id/Row8_Кнопки"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/Row8_button1"
@@ -562,7 +551,7 @@
             android:id="@+id/Row9_Надпись"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="invisible">
 
@@ -612,7 +601,7 @@
             android:id="@+id/Row10_Кнопки"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/Row10_button1"

@@ -5,6 +5,6 @@
     <color name="colorAccent">#ff4081</color>
     <color name="Orange">#e9c63a</color>
     <color name="Background">@android:color/background_light</color>
-    <color name="Gray">#eea2a2a2</color>
     <color name="OrangeDark">@android:color/holo_orange_dark</color>
+    <color name="DarkerGray">@android:color/darker_gray</color>
 </resources>

@@ -10,7 +10,7 @@ class Screen {
 
     private char PrevKey, CurrentKey, PrevAction, CurrentAction;
 
-    void ResetHistory () {
+    public void RsetHistory () {
         PrevKey = CurrentKey = PrevAction = CurrentAction = ' ';
     }
 
