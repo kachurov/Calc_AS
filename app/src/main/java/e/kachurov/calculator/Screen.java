@@ -10,7 +10,7 @@ class Screen {
 
     private char PrevKey, CurrentKey, PrevAction, CurrentAction;
 
-    public void RsetHistory () {
+    void ResetHistory () {
         PrevKey = CurrentKey = PrevAction = CurrentAction = ' ';
     }
 
@@ -100,6 +100,23 @@ class Screen {
             case R.id.Row8_button5:
                 PrevKey = CurrentKey;
                 CurrentKey = 'C';
+                break;
+                //  ---------- Кнопки управления памятью
+            case R.id.Row6_button5:  // M+
+                PrevKey = CurrentKey;
+                CurrentKey = 'a';
+                break;
+            case R.id.Row4_button5:  // M-
+                PrevKey = CurrentKey;
+                CurrentKey = 'b';
+                break;
+            case R.id.Row2_button4:  // MR
+                PrevKey = CurrentKey;
+                CurrentKey = 'c';
+                break;
+            case R.id.Row2_button3:  // MC
+                PrevKey = CurrentKey;
+                CurrentKey = 'd';
                 break;
         }
     }
