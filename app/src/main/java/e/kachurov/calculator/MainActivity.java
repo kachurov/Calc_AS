@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.os.Handler;
+
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -36,6 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         fv2_1 = findViewById(R.id.Row3_textView1);
     }
 
+
     // Следом три перегружаемых метода обновления зкрана
     void ScreenDraw(char c, boolean ScrClear) { // дописывание символа с очисткой экрана или без оной
         if (ScrClear) vScreenChar.delete(0, vScreenChar.length());  // очищаем временный буфер;
@@ -64,31 +67,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Pointer = Pointer > 2 ? 3 : ++Pointer;
     }
 
-    private void SaveD(char Action) {
+    private void SaveD(char Action) throws IllegalArgumentException {
         CharSequence cs = String.valueOf(Action);
         // Запись чисел в регистры
         tvF1.setBackgroundColor(getResources().getColor(R.color.Orange));
         //tvF2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         tvF1.setText(cs);
-        switch (oScreen.ActionHistory(PrevKey)) {
-            case 'C': // Была нажата клавиша Сброс. Меняем константу в dReg[Pointer] на новую, не меняя действия!
-                if (oScreen.ActionHistory(CurrentKey) != 'C') {
-                    Pointer = 2;
-                    Put(Double.parseDouble(vScreenChar.toString())); // приведем тип к double и запишем в регистр
-                } else {
+        try {
+            switch (oScreen.ActionHistory(PrevKey)) {
+                case 'C': // Была нажата клавиша Сброс. Меняем константу в dReg[Pointer] на новую, не меняя действия!
+                    if (oScreen.ActionHistory(CurrentKey) != 'C') {
+                        Pointer = 2;
+                        Put(Double.parseDouble(vScreenChar.toString())); // приведем тип к double и запишем в регистр
+                    } else {
+                        break;
+                    }
                     break;
-                }
-                break;
-            default:
-                if (((oScreen.KeyHistory(PrevKey)) == '=') && (Action != '=')) { // после равно нажали клавишу действия
-                    Pointer = 1;
-                    Put(Action);
-                    ScreenDraw();
-                } else {
-                    Put(Double.parseDouble(vScreenChar.toString())); // приведем тип к double и запишем в регистр
-                    Put(Action);
-                    ScreenDraw();
-                }
+                default:
+                    if (((oScreen.KeyHistory(PrevKey)) == '=') && (Action != '=')) { // после равно нажали клавишу действия
+                        Pointer = 1;
+                        Put(Action);
+                        ScreenDraw();
+                    } else {
+                        Put(Double.parseDouble(vScreenChar.toString())); // приведем тип к double и запишем в регистр
+                        Put(Action);
+                        ScreenDraw();
+                    }
+            }
+        } catch (IllegalArgumentException e) {
+            ScreenDraw();
+            tvScreen.setText("Error calculate!");   // Обновляем экран
         }
         if (Pointer == 3) PrepareReg(Action);
     }
@@ -168,10 +176,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
             fv2_1.setTextColor(getResources().getColor(R.color.DarkerGray));
         }
     }
-    private void Update_Shift (char cH) {
+
+    private void Update_Shift(char cH) {
         switch (cH) {
             case '7':  // 1/x
-                ScreenDraw(1/Double.parseDouble(vScreenChar.toString()));
+                ScreenDraw(1 / Double.parseDouble(vScreenChar.toString()));
         }
     }
 
@@ -183,6 +192,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
             vScreenChar.delete(0, vScreenChar.length());  // очищаем временный буфер;
             vScreenChar.append(res);                // добавляем введенный символ
             tvScreen.setText(vScreenChar.toString());          // Обновляем экран
+        }
+    }
+
+    void Reset (int Action) {
+        switch (Action) {
+            case 1: //первое нажатие
+                tvScreen.setText(R.string.HellowStr);
+                vScreenChar.delete(0, vScreenChar.length()); //сброс строки
+                Shift(false);
+                break;
+            case 2: //второе нажатие
+                tvScreen.setText(R.string.HellowStr);
+                vScreenChar.delete(0, vScreenChar.length()); //сброс строки
+                for (Pointer = 3; Pointer >= 0; Pointer--) {
+                    dReg[Pointer] = 0; //сброс регистра
+                    cReg[Pointer] = ' ';
+                }
+                Pointer = 0;
+                tvF1.setText(" ");// Сбросим функциональный экран
+                tvF1.setBackgroundColor(getResources().getColor(R.color.Background));
+                intClearAction = 0;
+                oScreen.RsetHistory();
+                break;
         }
     }
 
@@ -215,7 +247,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Update('6');
                 break;
             case R.id.Row4_button1:  // кнопка 7
-                if (Shift) {Update_Shift('7');} else {Update('7');}
+                if (Shift) {
+                    Update_Shift('7');
+                } else {
+                    Update('7');
+                }
                 break;
             case R.id.Row4_button2:  // кнопка 8
                 Update('8');
@@ -275,26 +311,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 // второе нажатие подряд + очистка регистров и сброс действия
                 oScreen.ActionHistory(v.getId());
                 ++intClearAction;
-                switch (intClearAction) {
-                    case 1: //первое нажатие
-                        tvScreen.setText(R.string.HellowStr);
-                        vScreenChar.delete(0, vScreenChar.length()); //сброс строки
-                        Shift (false);
-                        break;
-                    case 2: //второе нажатие
-                        tvScreen.setText(R.string.HellowStr);
-                        vScreenChar.delete(0, vScreenChar.length()); //сброс строки
-                        for (Pointer = 3; Pointer >= 0; Pointer--) {
-                            dReg[Pointer] = 0; //сброс регистра
-                            cReg[Pointer] = ' ';
-                        }
-                        Pointer = 0;
-                        tvF1.setText(" ");// Сбросим функциональный экран
-                        tvF1.setBackgroundColor(getResources().getColor(R.color.Background));
-                        intClearAction = 0;
-                        oScreen.RsetHistory();
-                        break;
-                }
+                Reset (intClearAction);
         }
     }
 }
