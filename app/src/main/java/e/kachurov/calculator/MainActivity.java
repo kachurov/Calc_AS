@@ -3,6 +3,7 @@ package e.kachurov.calculator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 import android.os.Handler;
@@ -18,12 +19,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public char cReg[] = {'0', '0', '0', '0'}; // регистры хранения операторов;
     int Pointer; // указатель на регистр с числом или действием
     TextView tvScreen, tvF1, tvF2;     // View экрана
-    TextView fv2_1;
+    TextView fv2_1, fv2_2, fv2_3, fv2_4, fv2_5;
     private Screen oScreen;
     private int intClearAction = 0;
     private boolean PrevKey = false;
     private boolean CurrentKey = true;
-    boolean Shift = false;
+    public static boolean Shift = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvF2 = findViewById(R.id.textView4);
         ////
         fv2_1 = findViewById(R.id.Row3_textView1);
+        fv2_2 = findViewById(R.id.Row3_textView2);
+        fv2_3 = findViewById(R.id.Row3_textView3);
+        fv2_4 = findViewById(R.id.Row3_textView4);
+        fv2_4.setText(Html.fromHtml("x<sup>y</sup>"));
+        fv2_5 = findViewById(R.id.Row3_textView5);
     }
 
 
@@ -71,8 +77,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         CharSequence cs = String.valueOf(Action);
         // Запись чисел в регистры
         tvF1.setBackgroundColor(getResources().getColor(R.color.Orange));
-        //tvF2.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        tvF1.setText(cs);
+
+        //Показ функциональных операций
+        if ((Shift) && (Action == 'e')) {
+            tvF1.setText(Html.fromHtml("x<sup>y</sup>"));
+        } else {
+            tvF1.setText(cs);
+        }
+
         try {
             switch (oScreen.ActionHistory(PrevKey)) {
                 case 'C': // Была нажата клавиша Сброс. Меняем константу в dReg[Pointer] на новую, не меняя действия!
@@ -160,6 +172,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 case 'b':
                 case 'c':
                 case 'd':
+                case 'e':
                     ScreenDraw(cH, true);
                     break;
                 default:
@@ -168,20 +181,38 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private void Shift(boolean Action) { // Action = true - включение режима Shift, false - выклбчение
+     public void Shift(boolean Action) { // Action = true - включение режима Shift, false - выклбчение
         Shift = Action;
         if (Action) {
             fv2_1.setTextColor(getResources().getColor(R.color.OrangeDark));
+            fv2_2.setTextColor(getResources().getColor(R.color.OrangeDark));
+            fv2_3.setTextColor(getResources().getColor(R.color.OrangeDark));
+            fv2_4.setTextColor(getResources().getColor(R.color.OrangeDark));
+            fv2_5.setTextColor(getResources().getColor(R.color.OrangeDark));
         } else {
             fv2_1.setTextColor(getResources().getColor(R.color.DarkerGray));
+            fv2_2.setTextColor(getResources().getColor(R.color.DarkerGray));
+            fv2_3.setTextColor(getResources().getColor(R.color.DarkerGray));
+            fv2_4.setTextColor(getResources().getColor(R.color.DarkerGray));
+            fv2_5.setTextColor(getResources().getColor(R.color.DarkerGray));
         }
     }
 
     private void Update_Shift(char cH) {
+        double i = Double.parseDouble(vScreenChar.toString()); // делить на ноль нельзя
+        Shift(false);
         switch (cH) {
             case '7':  // 1/x
-                double i = Double.parseDouble(vScreenChar.toString()); // делить на ноль нельзя
                 if (i != 0) {ScreenDraw(1 / i) ;} else {Reset(1);}
+                break;
+            case '8':  // x*x
+                ScreenDraw(i * i);
+                break;
+            case '9':  // √
+                ScreenDraw(Math.sqrt(i));
+            case 'f':  // корень кубический
+                ScreenDraw(Math.cbrt(i));
+                break;
         }
         }
 
@@ -255,10 +286,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case R.id.Row4_button2:  // кнопка 8
-                Update('8');
+                if (Shift) {
+                    Update_Shift('8');
+                } else {
+                    Update('8');
+                }
                 break;
             case R.id.Row4_button3:  // кнопка 9
-                Update('9');
+                if (Shift) {
+                    Update_Shift('9');
+                } else {
+                    Update('9');
+                }
                 break;
             case R.id.Row10_button2:  // кнопка Точка (или запятая?)
                 // Проверим, вводилась ли точка ранее, чтобы не допустить второй точки
@@ -283,7 +322,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.Row4_button4:  // кнопка разделить
                 oScreen.ActionHistory(v.getId());
-                SaveD('/');
+                if (Shift) {
+                    SaveD('e'); // x в степени y
+                    Shift(false);
+                } else {
+                    SaveD('/');
+                }
                 break;
             // ************ кнопки арифметических действий
             // кнопки управления памятью
@@ -291,7 +335,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 MemoryAction('a');
                 break;
             case R.id.Row4_button5: // M-
-                MemoryAction('b');
+                if (Shift) {
+                    Update_Shift('f');
+                } else {
+                    MemoryAction('b');
+                }
                 break;
             case R.id.Row2_button4: // MR
                 MemoryAction('c');

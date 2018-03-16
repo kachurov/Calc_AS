@@ -24,6 +24,8 @@ class Screen {
                 return s1 * s2;
             case '/':
                 return s1 / s2;
+            case 'e':
+                return Math.pow(s1, s2);
             default:
                 return 0;
         }

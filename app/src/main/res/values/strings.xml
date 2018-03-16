@@ -33,4 +33,7 @@
     <string name="Backspace">◄</string>
     <string name="RevX">1/x</string>
     <string name="Error">Error</string>
+    <string name="x2">x²</string>
+    <string name="sqr">\u221A</string>
+    <string name="sqr3">\u221B</string>
 </resources>
