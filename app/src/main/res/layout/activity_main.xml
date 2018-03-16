@@ -219,6 +219,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/DarkerGray"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 android:typeface="normal"
                 android:visibility="visible" />
 
@@ -232,25 +233,24 @@
                 android:textColor="@color/DarkerGray"
                 android:textColorLink="@color/DarkerGray"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 android:typeface="normal"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/Row3_textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/sqr"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"
-                android:typeface="normal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/Row3_textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@android:color/darker_gray"
@@ -263,8 +263,8 @@
                 android:layout_height="match_parent"
                 android:text="@string/sqr3"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/darker_gray"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textStyle="bold"
                 android:visibility="visible" />
 
         </TableRow>

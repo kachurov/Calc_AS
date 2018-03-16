@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.os.Handler;
 
 
-
 public class MainActivity extends Activity implements View.OnClickListener {
 
     static StringBuilder vScreenChar = new StringBuilder();  // Вводимый текст на экране (16 символов max)
@@ -181,20 +180,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-     public void Shift(boolean Action) { // Action = true - включение режима Shift, false - выклбчение
+    public void Shift(boolean Action) { // Action = true - включение режима Shift, false - выклбчение
         Shift = Action;
+        android.widget.TableRow R3 = findViewById(R.id.Row3_Надпись);
         if (Action) {
-            fv2_1.setTextColor(getResources().getColor(R.color.OrangeDark));
-            fv2_2.setTextColor(getResources().getColor(R.color.OrangeDark));
-            fv2_3.setTextColor(getResources().getColor(R.color.OrangeDark));
-            fv2_4.setTextColor(getResources().getColor(R.color.OrangeDark));
-            fv2_5.setTextColor(getResources().getColor(R.color.OrangeDark));
+            for (int j = 0; j < R3.getVirtualChildCount(); j++) {
+                TextView v = (TextView) R3.getVirtualChildAt(j);
+                v.setTextColor(getResources().getColor(R.color.OrangeDark));
+            }
         } else {
-            fv2_1.setTextColor(getResources().getColor(R.color.DarkerGray));
-            fv2_2.setTextColor(getResources().getColor(R.color.DarkerGray));
-            fv2_3.setTextColor(getResources().getColor(R.color.DarkerGray));
-            fv2_4.setTextColor(getResources().getColor(R.color.DarkerGray));
-            fv2_5.setTextColor(getResources().getColor(R.color.DarkerGray));
+            for (int j = 0; j < R3.getVirtualChildCount(); j++) {
+                TextView v = (TextView) R3.getVirtualChildAt(j);
+                v.setTextColor(getResources().getColor(R.color.DarkerGray));
+            }
         }
     }
 
@@ -203,7 +201,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Shift(false);
         switch (cH) {
             case '7':  // 1/x
-                if (i != 0) {ScreenDraw(1 / i) ;} else {Reset(1);}
+                if (i != 0) {
+                    ScreenDraw(1 / i);
+                } else {
+                    Reset(1);
+                }
                 break;
             case '8':  // x*x
                 ScreenDraw(i * i);
@@ -214,7 +216,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ScreenDraw(Math.cbrt(i));
                 break;
         }
-        }
+    }
 
     void Backspace() {
         if (vScreenChar.length() == 1) {
@@ -227,7 +229,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    void Reset (int Action) {
+    void Reset(int Action) {
         switch (Action) {
             case 1: //первое нажатие
                 tvScreen.setText(R.string.HellowStr);
@@ -360,7 +362,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 // второе нажатие подряд + очистка регистров и сброс действия
                 oScreen.ActionHistory(v.getId());
                 ++intClearAction;
-                Reset (intClearAction);
+                Reset(intClearAction);
         }
     }
 }
