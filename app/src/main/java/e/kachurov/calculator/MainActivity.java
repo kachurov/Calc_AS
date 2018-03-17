@@ -239,6 +239,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 } else {
                     ScreenDraw(Math.sin(i));
                 }
+                break;
+            case '5': // sin
+                if (RG == RadGrad.Grad) {
+                    ScreenDraw(Math.cos(Math.toRadians(i)));
+                } else {
+                    ScreenDraw(Math.cos(i));
+                }
+                break;
+            case '6': // sin
+                if (RG == RadGrad.Grad) {
+                    ScreenDraw(Math.tan(Math.toRadians(i)));
+                } else {
+                    ScreenDraw(Math.tan(i));
+                }
+                break;
         }
     }
 
@@ -304,10 +319,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case R.id.Row6_button2:  // кнопка 5
-                Update('5');
+                if (Shift) {
+                    Update_Shift('5');
+                } else {
+                    Update('5');
+                }
                 break;
             case R.id.Row6_button3:  // кнопка 6
-                Update('6');
+                if (Shift) {
+                    Update_Shift('6');
+                } else {
+                    Update('6');
+                }
                 break;
             case R.id.Row4_button1:  // кнопка 7
                 if (Shift) {
