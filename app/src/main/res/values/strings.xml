@@ -36,4 +36,10 @@
     <string name="x2">x²</string>
     <string name="sqr">\u221A</string>
     <string name="sqr3">\u221B</string>
+    <string name="Grad">GRAD</string>
+    <string name="RAD">RAD</string>
+    <string name="ERRCALC">Error calculate!</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tg">tg</string>
 </resources>

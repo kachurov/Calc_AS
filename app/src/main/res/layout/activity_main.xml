@@ -167,8 +167,10 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/darker_gray"
-                android:text="@string/Mode"
+                android:onClick="onClick"
+                android:text="@string/RAD"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="14sp"
                 android:visibility="visible" />
 
             <Button
@@ -329,36 +331,42 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/Row5_textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Shift"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sin"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/DarkerGray"
+                android:textStyle="bold"
+                android:typeface="normal"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/Row5_textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Shift"
+                android:text="@string/cos"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/DarkerGray"
+                android:textStyle="bold"
+                android:typeface="normal"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/Row5_textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Shift"
+                android:text="@string/tg"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/DarkerGray"
+                android:textStyle="bold"
+                android:typeface="normal"
                 android:visibility="visible" />
 
             <TextView
@@ -651,5 +659,21 @@
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/textView_GR"
+        android:layout_width="53dp"
+        android:layout_height="22dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Grad"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textDisplay"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

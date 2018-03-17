@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
-import android.os.Handler;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -17,13 +16,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public double Mem = 0; // содержимое памяти
     public char cReg[] = {'0', '0', '0', '0'}; // регистры хранения операторов;
     int Pointer; // указатель на регистр с числом или действием
-    TextView tvScreen, tvF1, tvF2;     // View экрана
-    TextView fv2_1, fv2_2, fv2_3, fv2_4, fv2_5;
+    TextView tvScreen, tvF1, tvF2, tvGR;     // View экрана
+    TextView fv2_1, fv2_2, fv2_3, fv2_4, fv2_5, button_RG;
+
     private Screen oScreen;
     private int intClearAction = 0;
-    private boolean PrevKey = false;
-    private boolean CurrentKey = true;
+    boolean PrevKey = false;
+    boolean CurrentKey = true;
     public static boolean Shift = false;
+    enum RadGrad {Rad, Grad}
+    public static RadGrad RG = RadGrad.Grad;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvScreen = findViewById(R.id.textDisplay);
         tvF1 = findViewById(R.id.textView11); //отображение операций - +, -, /, * и т.д.
         tvF2 = findViewById(R.id.textView4);
+        tvGR = findViewById(R.id.textView_GR);
         ////
         fv2_1 = findViewById(R.id.Row3_textView1);
         fv2_2 = findViewById(R.id.Row3_textView2);
@@ -41,6 +44,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         fv2_4 = findViewById(R.id.Row3_textView4);
         fv2_4.setText(Html.fromHtml("x<sup>y</sup>"));
         fv2_5 = findViewById(R.id.Row3_textView5);
+        button_RG = findViewById(R.id.Row2_button2);
     }
 
 
@@ -107,7 +111,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         } catch (IllegalArgumentException e) {
             ScreenDraw();
-            tvScreen.setText("Error calculate!");   // Обновляем экран
+            tvScreen.setText(getResources().getString(R.string.ERRCALC));   // Обновляем экран
         }
         if (Pointer == 3) PrepareReg(Action);
     }
@@ -212,6 +216,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case '9':  // √
                 ScreenDraw(Math.sqrt(i));
+                break;
             case 'f':  // корень кубический
                 ScreenDraw(Math.cbrt(i));
                 break;
@@ -363,6 +368,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 oScreen.ActionHistory(v.getId());
                 ++intClearAction;
                 Reset(intClearAction);
+            case R.id.Row2_button2:  // Градусы/Радианы переключение
+                if (RG == RadGrad.Grad) {
+                    RG = RadGrad.Rad;
+                    tvGR.setText(getResources().getString(R.string.RAD));   // Обновляем экран
+                    button_RG.setText(getResources().getString(R.string.Grad));
+                } else {
+                    RG = RadGrad.Grad;
+                    tvGR.setText(getResources().getString(R.string.Grad));   // Обновляем экран
+                    button_RG.setText(getResources().getString(R.string.RAD));
+                }
+                break;
         }
     }
 }
