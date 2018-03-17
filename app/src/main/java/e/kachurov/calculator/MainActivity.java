@@ -274,6 +274,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 oScreen.RsetHistory();
                 break;
         }
+        vScreenChar.append("0");
     }
 
     @Override
@@ -398,12 +399,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     RG = RadGrad.Rad;
                     tvGR.setText(getResources().getString(R.string.RAD));   // Обновляем экран grad/rad
                     button_RG.setText(getResources().getString(R.string.Grad));
-                    ScreenDraw(Math.toRadians(i));
+                    if (i!=0) {ScreenDraw(Math.toRadians(i));}
                 } else {
                     RG = RadGrad.Grad;
                     tvGR.setText(getResources().getString(R.string.Grad));   // Обновляем экран
                     button_RG.setText(getResources().getString(R.string.RAD));
-                    ScreenDraw(Math.toDegrees(i));
+                    if (i!=0) {ScreenDraw(Math.toDegrees(i));}
                 }
                 break;
         }

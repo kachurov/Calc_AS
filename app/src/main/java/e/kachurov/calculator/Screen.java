@@ -120,6 +120,8 @@ class Screen {
                 PrevKey = CurrentKey;
                 CurrentKey = 'd';
                 break;
+            default:  // RAD GRAD
+                break;
         }
     }
 
@@ -151,7 +153,8 @@ class Screen {
                 PrevAction = CurrentAction;
                 CurrentAction = 'C';
                 break;
-
+            default:
+                break;
         }
     }
 
