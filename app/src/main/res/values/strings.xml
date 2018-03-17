@@ -42,4 +42,6 @@
     <string name="sin">sin</string>
     <string name="cos">cos</string>
     <string name="tg">tg</string>
+    <string name="ln">ln</string>
+    <string name="log10">log10</string>
 </resources>

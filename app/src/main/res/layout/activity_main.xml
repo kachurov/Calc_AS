@@ -373,20 +373,23 @@
                 android:id="@+id/Row5_textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Shift"
+                android:text="@string/ln"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/DarkerGray"
+                android:textStyle="bold"
+                android:typeface="normal"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/Row5_textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Shift"
+                android:text="@string/log10"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@android:color/holo_orange_dark"
+                android:textColor="@android:color/darker_gray"
+                android:typeface="normal"
                 android:visibility="visible" />
 
         </TableRow>

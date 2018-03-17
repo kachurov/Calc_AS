@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
+import java.math.BigDecimal;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -56,8 +57,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     void ScreenDraw(double d) { // вывод рассчитанного числа на зкран с очисткой
+        int Scale = 11;
         vScreenChar.delete(0, vScreenChar.length());  // очищаем временный буфер;
-        vScreenChar.append(d);                // добавляем введенный символ
+        vScreenChar.append(BigDecimal.valueOf(d).setScale(Scale, BigDecimal.ROUND_HALF_UP));                // добавляем введенный символ
         tvScreen.setText(vScreenChar.toString());          // Обновляем экран
     }
 
@@ -186,15 +188,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public void Shift(boolean Action) { // Action = true - включение режима Shift, false - выклбчение
         Shift = Action;
+        int j;
+        TextView v;
         android.widget.TableRow R3 = findViewById(R.id.Row3_Надпись);
+        android.widget.TableRow R5 = findViewById(R.id.Row5_Надпись);
         if (Action) {
-            for (int j = 0; j < R3.getVirtualChildCount(); j++) {
-                TextView v = (TextView) R3.getVirtualChildAt(j);
+            for (j = 0; j < R3.getVirtualChildCount(); j++) {
+                v = (TextView) R3.getVirtualChildAt(j);
+                v.setTextColor(getResources().getColor(R.color.OrangeDark));
+            }
+            for (j = 0; j < R5.getVirtualChildCount(); j++) {
+                v = (TextView) R5.getVirtualChildAt(j);
                 v.setTextColor(getResources().getColor(R.color.OrangeDark));
             }
         } else {
-            for (int j = 0; j < R3.getVirtualChildCount(); j++) {
-                TextView v = (TextView) R3.getVirtualChildAt(j);
+            for (j = 0; j < R3.getVirtualChildCount(); j++) {
+                v = (TextView) R3.getVirtualChildAt(j);
+                v.setTextColor(getResources().getColor(R.color.DarkerGray));
+            }
+            for (j = 0; j < R5.getVirtualChildCount(); j++) {
+                v = (TextView) R5.getVirtualChildAt(j);
                 v.setTextColor(getResources().getColor(R.color.DarkerGray));
             }
         }
@@ -220,6 +233,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case 'f':  // корень кубический
                 ScreenDraw(Math.cbrt(i));
                 break;
+            case '4': // sin
+                if (RG == RadGrad.Grad) {
+                    ScreenDraw(Math.sin(Math.toRadians(i)));
+                } else {
+                    ScreenDraw(Math.sin(i));
+                }
         }
     }
 
@@ -277,7 +296,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Update('3');
                 break;
             case R.id.Row6_button1:  // кнопка 4
-                Update('4');
+                if (Shift) {
+                    Update_Shift('4');
+                } else {
+                    Update('4');
+                }
                 break;
             case R.id.Row6_button2:  // кнопка 5
                 Update('5');
@@ -368,15 +391,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 oScreen.ActionHistory(v.getId());
                 ++intClearAction;
                 Reset(intClearAction);
+                break;
             case R.id.Row2_button2:  // Градусы/Радианы переключение
+                double i = Double.parseDouble(vScreenChar.toString());
                 if (RG == RadGrad.Grad) {
                     RG = RadGrad.Rad;
-                    tvGR.setText(getResources().getString(R.string.RAD));   // Обновляем экран
+                    tvGR.setText(getResources().getString(R.string.RAD));   // Обновляем экран grad/rad
                     button_RG.setText(getResources().getString(R.string.Grad));
+                    ScreenDraw(Math.toRadians(i));
                 } else {
                     RG = RadGrad.Grad;
                     tvGR.setText(getResources().getString(R.string.Grad));   // Обновляем экран
                     button_RG.setText(getResources().getString(R.string.RAD));
+                    ScreenDraw(Math.toDegrees(i));
                 }
                 break;
         }
